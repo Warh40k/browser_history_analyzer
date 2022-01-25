@@ -12,21 +12,11 @@ from form import Ui_Widget
 class Widget(QWidget):
     def __init__(self):
         super(Widget, self).__init__()
-        self.load_ui()
+        self.ui = Ui_Widget()
+        self.ui.setupUi(self)
         model = QFileSystemModel()
         model.setRootPath(QDir.currentPath())
-        treeView = QTreeView()
-        treeView.setModel(model)
-
-    # Я так понимаю для загрузки элементов из ui файла
-    def load_ui(self):
-        loader = QUiLoader()
-        path = os.fspath(Path(__file__).resolve().parent / "form.ui")
-        ui_file = QFile(path)
-        ui_file.open(QFile.ReadOnly)
-        loader.load(ui_file, self)
-        ui_file.close()
-
+        self.ui.treeView.setModel(model)
 
 if __name__ == "__main__":
     app = QApplication([])
