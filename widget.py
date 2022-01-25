@@ -17,7 +17,6 @@ class Widget(QWidget):
         model = QFileSystemModel()
         model.setRootPath(QDir.currentPath())
         self.ui.treeView.setModel(model)
-
 if __name__ == "__main__":
     app = QApplication([])
     widget = Widget()
