@@ -2,6 +2,7 @@
 import sys
 import sqlite3
 
+from datetime import datetime
 from PySide6.QtWidgets import QWidget, QFileDialog
 from PySide6.QtCore import Slot
 
@@ -14,7 +15,7 @@ class Widget(QWidget):
         super(Widget, self).__init__()
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.ui.lineEdit.setText("/usr/firefox/comp/places.sqlite")
+        self.ui.lineEdit.setText("/usr/firefox/comp/places.sqlite_")
 
         self.ui.select_button.clicked.connect(self.show_dialog)
         self.ui.exit_button.clicked.connect(sys.exit)
@@ -26,10 +27,10 @@ class Widget(QWidget):
         con = sqlite3.connect(path)
         cur = con.cursor()
 
-#        cur.execute("SELECT title, url, visit_count, last_visit_date \ FROM moz_places")
         cur.execute("SELECT title, last_visit_date AS date FROM moz_places")
         for title, date in cur:
             if title is not None and date is not None:
+                date = datetime.fromtimestamp(round(date/1000000))
                 self.ui.listWidget.addItem("{0}, {1}".format(title, date))
         con.close()
 

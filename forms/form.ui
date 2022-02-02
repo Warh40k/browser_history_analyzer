@@ -34,7 +34,7 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="text">
-      <string>Введите путь к вашему профилю firefox</string>
+      <string>Просмотр истории firefox</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -64,7 +64,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Выбор профиля</string>
+      <string>Выбор профиля браузера</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
