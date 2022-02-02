@@ -1,5 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import sys
+import sqlite3
 
 from PySide6.QtWidgets import QWidget, QFileDialog
 from PySide6.QtCore import Slot
@@ -13,10 +14,26 @@ class Widget(QWidget):
         super(Widget, self).__init__()
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.showDialog)
-        self.ui.pushButton_3.clicked.connect(sys.exit)
+        self.ui.lineEdit.setText("/usr/firefox/comp/places.sqlite")
+
+        self.ui.select_button.clicked.connect(self.show_dialog)
+        self.ui.exit_button.clicked.connect(sys.exit)
+        self.ui.confirm_button.clicked.connect(self.get_history)
 
     @Slot()
-    def showDialog(self):
+    def get_history(self):
+        path = self.ui.lineEdit.text()
+        con = sqlite3.connect(path)
+        cur = con.cursor()
+
+#        cur.execute("SELECT title, url, visit_count, last_visit_date \ FROM moz_places")
+        cur.execute("SELECT title, last_visit_date AS date FROM moz_places")
+        for title, date in cur:
+            if title is not None and date is not None:
+                self.ui.listWidget.addItem("{0}, {1}".format(title, date))
+        con.close()
+
+    @Slot()
+    def show_dialog(self):
         path = QFileDialog.getOpenFileName()[0]
         self.ui.lineEdit.setText(path)
