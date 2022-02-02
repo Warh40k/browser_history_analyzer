@@ -173,9 +173,25 @@
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidget">
-     <property name="columnCount">
-      <number>0</number>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
      </property>
+     <property name="columnCount">
+      <number>2</number>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>100</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Название</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Дата</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>

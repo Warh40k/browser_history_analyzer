@@ -29,23 +29,25 @@ class Widget(QWidget):
         cur = con.cursor()
 
         cur.execute("SELECT title, last_visit_date AS date FROM moz_places")
-
+        table_content = cur.fetchall()
+        cur.close()
+        data_length = len(table_content)
         self.ui.tableWidget.setColumnCount(2)
+        self.ui.tableWidget.setRowCount(data_length)
         self.ui.tableWidget.setHorizontalHeaderLabels(["Name", "Date"])
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        for title, raw_date in cur:
+        row_number = 0
+        for title, raw_date in table_content:
             if title is not None and raw_date is not None:
                 date = datetime.fromtimestamp(round(raw_date/1000000))
-                key = self.ui.tableWidget.rowCount()
-                self.ui.tableWidget.setRowCount(key+1)
-                print(key)
                 title_item = QTableWidgetItem(title)
                 date_item = QTableWidgetItem(str(date))
-                self.ui.tableWidget.setItem(key, 0, title_item)
-                self.ui.tableWidget.setItem(key, 1, date_item)
-        con.close()
+                self.ui.tableWidget.setItem(row_number, 0, title_item)
+                self.ui.tableWidget.setItem(row_number, 1, date_item)
+                row_number += 1
+
 
     @Slot()
     def show_dialog(self):
