@@ -46,6 +46,7 @@ class Widget(QWidget):
                 self.ui.tableWidget.setItem(row_number, 0, title_item)
                 self.ui.tableWidget.setItem(row_number, 1, date_item)
 
+        self.ui.tableWidget.sortItems(1, Qt.AscendingOrder)
 
     @Slot()
     def show_dialog(self):
