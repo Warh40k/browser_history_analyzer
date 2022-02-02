@@ -5,7 +5,7 @@ import sqlite3
 from datetime import datetime
 
 from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem, QHeaderView
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Slot, Qt
 
 from form import Ui_Widget
 
@@ -38,15 +38,13 @@ class Widget(QWidget):
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        row_number = 0
-        for title, raw_date in table_content:
+        for row_number, (title, raw_date) in enumerate(table_content):
             if title is not None and raw_date is not None:
                 date = datetime.fromtimestamp(round(raw_date/1000000))
                 title_item = QTableWidgetItem(title)
                 date_item = QTableWidgetItem(str(date))
                 self.ui.tableWidget.setItem(row_number, 0, title_item)
                 self.ui.tableWidget.setItem(row_number, 1, date_item)
-                row_number += 1
 
 
     @Slot()
