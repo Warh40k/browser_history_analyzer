@@ -3,7 +3,9 @@ import sys
 import sqlite3
 
 from datetime import datetime
-from PySide6.QtWidgets import QWidget, QFileDialog
+from os import curdir
+
+from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem, QAbstractItemView
 from PySide6.QtCore import Slot
 
 from form import Ui_Widget
@@ -28,10 +30,18 @@ class Widget(QWidget):
         cur = con.cursor()
 
         cur.execute("SELECT title, last_visit_date AS date FROM moz_places")
-        for title, date in cur:
-            if title is not None and date is not None:
-                date = datetime.fromtimestamp(round(date/1000000))
-                self.ui.listWidget.addItem("{0}, {1}".format(title, date))
+
+        self.ui.tableWidget.setColumnCount(2)
+        self.ui.tableWidget.setHorizontalHeaderLabels(["Name", "Date"])
+
+        for title, raw_date in cur:
+            if title is not None and raw_date is not None:
+                date = datetime.fromtimestamp(round(raw_date/1000000))
+                key = self.ui.tableWidget.rowCount()
+                title_item = QTableWidgetItem(title)
+                date_item = QTableWidgetItem(str(date))
+                self.ui.tableWidget.setItem(key, 0, title_item)
+                self.ui.tableWidget.setItem(key, 1, date_item)
         con.close()
 
     @Slot()

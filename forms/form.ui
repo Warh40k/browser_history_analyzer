@@ -172,12 +172,9 @@
     </spacer>
    </item>
    <item>
-    <widget class="QListWidget" name="listWidget">
-     <property name="minimumSize">
-      <size>
-       <width>853</width>
-       <height>200</height>
-      </size>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="columnCount">
+      <number>0</number>
      </property>
     </widget>
    </item>

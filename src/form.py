@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
-    QLabel, QLineEdit, QListWidget, QListWidgetItem,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+    QHeaderView, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -101,11 +101,11 @@ class Ui_Widget(object):
 
         self.verticalLayout.addItem(self.verticalSpacer_2)
 
-        self.listWidget = QListWidget(Widget)
-        self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setMinimumSize(QSize(853, 200))
+        self.tableWidget = QTableWidget(Widget)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setColumnCount(0)
 
-        self.verticalLayout.addWidget(self.listWidget)
+        self.verticalLayout.addWidget(self.tableWidget)
 
         self.verticalSpacer = QSpacerItem(100, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
