@@ -106,6 +106,7 @@ class Ui_Widget(object):
         self.tableWidget.setGridStyle(Qt.SolidLine)
         self.tableWidget.setSortingEnabled(True)
         self.tableWidget.setColumnCount(0)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(100)
 
         self.verticalLayout.addWidget(self.tableWidget)

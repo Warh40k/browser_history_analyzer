@@ -2,9 +2,10 @@
 import sys
 import sqlite3
 
+from override_form import overrideTableWidget
 from datetime import datetime
 
-from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem, QHeaderView
+from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem, QHeaderView, QAbstractItemView
 from PySide6.QtCore import Slot, Qt
 
 from form import Ui_Widget
@@ -16,7 +17,7 @@ class Widget(QWidget):
         super(Widget, self).__init__()
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.ui.lineEdit.setText("/usr/firefox/comp/places.sqlite_")
+        overrideTableWidget(self.ui)
 
         self.ui.select_button.clicked.connect(self.show_dialog)
         self.ui.exit_button.clicked.connect(sys.exit)
@@ -32,11 +33,7 @@ class Widget(QWidget):
         table_content = cur.fetchall()
         cur.close()
         data_length = len(table_content)
-        self.ui.tableWidget.setColumnCount(2)
         self.ui.tableWidget.setRowCount(data_length)
-        self.ui.tableWidget.setHorizontalHeaderLabels(["Name", "Date"])
-        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.ui.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         for row_number, (title, raw_date) in enumerate(table_content):
             if title is not None and raw_date is not None:
