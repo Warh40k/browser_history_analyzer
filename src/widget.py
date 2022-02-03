@@ -23,25 +23,25 @@ class Widget(QWidget):
         self.ui.exit_button.clicked.connect(sys.exit)
         self.ui.confirm_button.clicked.connect(self.get_history)
 
+# Taking history from db and output to table widget
     @Slot()
     def get_history(self):
         path = self.ui.lineEdit.text()
         con = sqlite3.connect(path)
         cur = con.cursor()
-
-        cur.execute("SELECT title, last_visit_date AS date FROM moz_places")
+        cur.execute("SELECT title, last_visit_date AS date FROM moz_places "
+                    "WHERE title IS NOT Null AND last_visit_date IS NOT NULL")
         table_content = cur.fetchall()
         cur.close()
         data_length = len(table_content)
         self.ui.tableWidget.setRowCount(data_length)
 
         for row_number, (title, raw_date) in enumerate(table_content):
-            if title is not None and raw_date is not None:
-                date = datetime.fromtimestamp(round(raw_date/1000000))
-                title_item = QTableWidgetItem(title)
-                date_item = QTableWidgetItem(str(date))
-                self.ui.tableWidget.setItem(row_number, 0, title_item)
-                self.ui.tableWidget.setItem(row_number, 1, date_item)
+            date = datetime.fromtimestamp(round(raw_date/1000000))
+            title_item = QTableWidgetItem(title)
+            date_item = QTableWidgetItem(str(date))
+            self.ui.tableWidget.setItem(row_number, 0, title_item)
+            self.ui.tableWidget.setItem(row_number, 1, date_item)
 
         self.ui.tableWidget.sortItems(1, Qt.AscendingOrder)
 
