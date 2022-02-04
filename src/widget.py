@@ -1,12 +1,14 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import sqlite3
+import os
 
 from override_form import overrideTableWidget
 from datetime import datetime
 
 from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem
 from PySide6.QtCore import Slot, Qt
+from PySide6.QtGui import QDesktopServices
 
 from form import Ui_Widget
 
@@ -37,7 +39,6 @@ class Widget(QWidget):
         row_count = len(table_content)
         column_count = len(table_content[0])
         self.ui.tableWidget.setRowCount(row_count)
-        self.ui.tableWidget.setColumnCount(column_count)
         self.ui.tableWidget.setColumnHidden(2, True)
 
         for row_number, (title, raw_date, site_url) in enumerate(table_content):
@@ -58,4 +59,6 @@ class Widget(QWidget):
 
     @Slot()
     def open_url(self):
-        self.ui.tableWidget.currentItem()
+        selected_row = self.ui.tableWidget.currentRow()
+        selected_url = self.ui.tableWidget.item(selected_row, 2).text()
+        QDesktopServices.openUrl(selected_url)
