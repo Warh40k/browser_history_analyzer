@@ -32,23 +32,27 @@ class Widget(QWidget):
         path = self.ui.lineEdit.text()
         con = sqlite3.connect(path)
         cur = con.cursor()
-        cur.execute("SELECT title, last_visit_date, url AS date FROM moz_places "
-                    "WHERE title IS NOT Null AND last_visit_date IS NOT NULL")
+        cur.execute("SELECT p.title, p.last_visit_date, p.url, o.host FROM moz_places AS p "
+                    "LEFT JOIN moz_origins AS o ON p.origin_id = o.id "
+                    "WHERE p.title IS NOT NULL AND p.last_visit_date IS NOT NULL")
+
         table_content = cur.fetchall()
         cur.close()
         row_count = len(table_content)
         column_count = len(table_content[0])
         self.ui.tableWidget.setRowCount(row_count)
-        self.ui.tableWidget.setColumnHidden(2, True)
+        self.ui.tableWidget.setColumnHidden(3, True)
 
-        for row_number, (title, raw_date, site_url) in enumerate(table_content):
+        for row_number, (title, raw_date, site_url, site_host) in enumerate(table_content):
             date = datetime.fromtimestamp(round(raw_date/1000000))
             title_item = QTableWidgetItem(title)
             date_item = QTableWidgetItem(str(date))
             url_item = QTableWidgetItem(site_url)
+            host_item = QTableWidgetItem(site_host)
             self.ui.tableWidget.setItem(row_number, 0, title_item)
             self.ui.tableWidget.setItem(row_number, 1, date_item)
-            self.ui.tableWidget.setItem(row_number, 2, url_item)
+            self.ui.tableWidget.setItem(row_number, 2, host_item)
+            self.ui.tableWidget.setItem(row_number, 3, url_item)
 
         self.ui.tableWidget.sortItems(1, Qt.AscendingOrder)
 
@@ -60,5 +64,5 @@ class Widget(QWidget):
     @Slot()
     def open_url(self):
         selected_row = self.ui.tableWidget.currentRow()
-        selected_url = self.ui.tableWidget.item(selected_row, 2).text()
+        selected_url = self.ui.tableWidget.item(selected_row, 3).text()
         QDesktopServices.openUrl(selected_url)
