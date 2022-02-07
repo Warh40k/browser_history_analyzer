@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QSpacerItem, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGroupBox,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -95,34 +95,64 @@ class Ui_Widget(object):
         self.verticalLayout_3.addWidget(self.confirm_button, 0, Qt.AlignHCenter)
 
 
-        self.verticalLayout.addWidget(self.groupBox, 0, Qt.AlignHCenter)
+        self.verticalLayout.addWidget(self.groupBox)
 
         self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.verticalLayout.addItem(self.verticalSpacer_2)
 
-        self.tableWidget = QTableWidget(Widget)
+        self.tabWidget = QTabWidget(Widget)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tabWidget.setMinimumSize(QSize(853, 450))
+        self.tabWidget.setBaseSize(QSize(0, 0))
+        self.tabWidget.setTabPosition(QTabWidget.North)
+        self.tabWidget.setTabShape(QTabWidget.Rounded)
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.verticalLayout_2 = QVBoxLayout(self.tab)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.tableWidget = QTableWidget(self.tab)
         self.tableWidget.setObjectName(u"tableWidget")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy3)
+        self.tableWidget.setMaximumSize(QSize(16777215, 16777215))
+        self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         self.tableWidget.setGridStyle(Qt.SolidLine)
         self.tableWidget.setSortingEnabled(True)
         self.tableWidget.setColumnCount(0)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(100)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
 
-        self.verticalLayout.addWidget(self.tableWidget)
+        self.verticalLayout_2.addWidget(self.tableWidget)
 
-        self.verticalSpacer = QSpacerItem(100, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.tabWidget.addTab(self.tab_2, "")
 
-        self.verticalLayout.addItem(self.verticalSpacer)
+        self.verticalLayout.addWidget(self.tabWidget)
 
         self.exit_button = QPushButton(Widget)
         self.exit_button.setObjectName(u"exit_button")
+        self.exit_button.setMaximumSize(QSize(80, 27))
         self.exit_button.setFont(font1)
 
         self.verticalLayout.addWidget(self.exit_button, 0, Qt.AlignHCenter)
 
+        QWidget.setTabOrder(self.lineEdit, self.select_button)
+        QWidget.setTabOrder(self.select_button, self.confirm_button)
+        QWidget.setTabOrder(self.confirm_button, self.tabWidget)
+        QWidget.setTabOrder(self.tabWidget, self.tableWidget)
+        QWidget.setTabOrder(self.tableWidget, self.exit_button)
 
         self.retranslateUi(Widget)
+
+        self.tabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(Widget)
     # setupUi
@@ -133,6 +163,8 @@ class Ui_Widget(object):
         self.groupBox.setTitle(QCoreApplication.translate("Widget", u"\u0412\u044b\u0431\u043e\u0440 \u043f\u0440\u043e\u0444\u0438\u043b\u044f \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430", None))
         self.select_button.setText(QCoreApplication.translate("Widget", u"\u041e\u0431\u0437\u043e\u0440", None))
         self.confirm_button.setText(QCoreApplication.translate("Widget", u"\u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044c", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Widget", u"\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Widget", u"\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430", None))
         self.exit_button.setText(QCoreApplication.translate("Widget", u"\u0412\u044b\u0445\u043e\u0434", None))
     # retranslateUi
 

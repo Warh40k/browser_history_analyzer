@@ -1,7 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import sqlite3
-import os
 
 from override_form import overrideTableWidget
 from datetime import datetime
