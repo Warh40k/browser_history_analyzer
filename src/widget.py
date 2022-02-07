@@ -19,10 +19,11 @@ class Widget(QWidget):
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
         overrideTableWidget(self.ui)
-
+        self.table_content = []
         self.ui.select_button.clicked.connect(self.show_dialog)
         self.ui.exit_button.clicked.connect(sys.exit)
         self.ui.confirm_button.clicked.connect(self.get_history)
+        self.ui.confirm_button.clicked.connect(self.report_history)
         self.ui.tableWidget.itemDoubleClicked.connect(self.open_url)
 
 # Taking history from db and output to table widget
@@ -35,14 +36,13 @@ class Widget(QWidget):
                     "LEFT JOIN moz_origins AS o ON p.origin_id = o.id "
                     "WHERE p.title IS NOT NULL AND p.last_visit_date IS NOT NULL")
 
-        table_content = cur.fetchall()
+        self.table_content = cur.fetchall()
         cur.close()
-        row_count = len(table_content)
-        column_count = len(table_content[0])
+        row_count = len(self.table_content)
         self.ui.tableWidget.setRowCount(row_count)
         self.ui.tableWidget.setColumnHidden(3, True)
 
-        for row_number, (title, raw_date, site_url, site_host) in enumerate(table_content):
+        for row_number, (title, raw_date, site_url, site_host) in enumerate(self.table_content):
             date = datetime.fromtimestamp(round(raw_date/1000000))
             title_item = QTableWidgetItem(title)
             date_item = QTableWidgetItem(str(date))
@@ -65,3 +65,23 @@ class Widget(QWidget):
         selected_row = self.ui.tableWidget.currentRow()
         selected_url = self.ui.tableWidget.item(selected_row, 3).text()
         QDesktopServices.openUrl(selected_url)
+
+    def report_history(self):
+        list_origins = []
+        for i in self.table_content:
+            list_origins.append(i[3])
+        print(list_origins)
+        set_origins = set(list_origins)
+        count_dict = {}
+        for i in set_origins:
+            count_dict[i] = list_origins.count(i)
+
+        sorted_tuple = sorted(count_dict.items(), key=lambda x: x[1])
+        sorted_tuple.reverse()
+        print(sorted_tuple[:15])
+        for i in range(15):
+            name_item = QTableWidgetItem(sorted_tuple[i][0])
+            count_item = QTableWidgetItem(str(sorted_tuple[i][1]))
+            print(sorted_tuple[i][1])
+            self.ui.topsiteTable.setItem(i, 0, name_item)
+            self.ui.topsiteTable.setItem(i, 1, count_item)
