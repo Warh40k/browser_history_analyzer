@@ -108,11 +108,11 @@ class Ui_Widget(object):
         self.tabWidget.setBaseSize(QSize(0, 0))
         self.tabWidget.setTabPosition(QTabWidget.North)
         self.tabWidget.setTabShape(QTabWidget.Rounded)
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.verticalLayout_2 = QVBoxLayout(self.tab)
+        self.history = QWidget()
+        self.history.setObjectName(u"history")
+        self.verticalLayout_2 = QVBoxLayout(self.history)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.tableWidget = QTableWidget(self.tab)
+        self.tableWidget = QTableWidget(self.history)
         self.tableWidget.setObjectName(u"tableWidget")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
@@ -130,28 +130,32 @@ class Ui_Widget(object):
 
         self.verticalLayout_2.addWidget(self.tableWidget)
 
-        self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        self.gridLayout = QGridLayout(self.tab_2)
+        self.tabWidget.addTab(self.history, "")
+        self.top = QWidget()
+        self.top.setObjectName(u"top")
+        self.gridLayout = QGridLayout(self.top)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.label_2 = QLabel(self.tab_2)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font1)
-
-        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-
-        self.topsiteTable = QTableWidget(self.tab_2)
+        self.topsiteTable = QTableWidget(self.top)
         self.topsiteTable.setObjectName(u"topsiteTable")
 
-        self.gridLayout.addWidget(self.topsiteTable, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.topsiteTable, 0, 0, 1, 1)
 
-        self.tabWidget.addTab(self.tab_2, "")
-        self.tab_3 = QWidget()
-        self.tab_3.setObjectName(u"tab_3")
-        self.formLayout_2 = QFormLayout(self.tab_3)
+        self.tabWidget.addTab(self.top, "")
+        self.activity = QWidget()
+        self.activity.setObjectName(u"activity")
+        self.verticalLayout_4 = QVBoxLayout(self.activity)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.activityTable = QTableWidget(self.activity)
+        self.activityTable.setObjectName(u"activityTable")
+
+        self.verticalLayout_4.addWidget(self.activityTable)
+
+        self.tabWidget.addTab(self.activity, "")
+        self.stats = QWidget()
+        self.stats.setObjectName(u"stats")
+        self.formLayout_2 = QFormLayout(self.stats)
         self.formLayout_2.setObjectName(u"formLayout_2")
-        self.scrollArea = QScrollArea(self.tab_3)
+        self.scrollArea = QScrollArea(self.stats)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
@@ -211,7 +215,7 @@ class Ui_Widget(object):
 
         self.formLayout_2.setWidget(0, QFormLayout.SpanningRole, self.scrollArea)
 
-        self.tabWidget.addTab(self.tab_3, "")
+        self.tabWidget.addTab(self.stats, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
 
@@ -242,14 +246,14 @@ class Ui_Widget(object):
         self.groupBox.setTitle(QCoreApplication.translate("Widget", u"\u0412\u044b\u0431\u043e\u0440 \u043f\u0440\u043e\u0444\u0438\u043b\u044f \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430", None))
         self.select_button.setText(QCoreApplication.translate("Widget", u"\u041e\u0431\u0437\u043e\u0440", None))
         self.confirm_button.setText(QCoreApplication.translate("Widget", u"\u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044c", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Widget", u"\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439", None))
-        self.label_2.setText(QCoreApplication.translate("Widget", u"\u0422\u043e\u043f-10 \u043f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u044b\u0445 \u0441\u0430\u0439\u0442\u043e\u0432:", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Widget", u"\u0422\u043e\u043f", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.history), QCoreApplication.translate("Widget", u"\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.top), QCoreApplication.translate("Widget", u"\u0422\u043e\u043f", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.activity), QCoreApplication.translate("Widget", u"\u0410\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c", None))
         self.label_3.setText(QCoreApplication.translate("Widget", u"\u0421\u0440\u0435\u0434\u043d\u0435\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439 \u0432 \u0434\u0435\u043d\u044c:", None))
         self.label_4.setText(QCoreApplication.translate("Widget", u"\u0421\u0430\u043c\u043e\u0435 \u043f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u043e\u0435 \u0432\u0440\u0435\u043c\u044f \u0441\u0451\u0440\u0444\u0438\u043d\u0433\u0430:", None))
         self.label_5.setText(QCoreApplication.translate("Widget", u"\u0421\u0430\u043c\u044b\u0439 \u043f\u043e\u0441\u0435\u0449\u0430\u0435\u043c\u044b\u0439 \u0434\u043e\u043c\u0435\u043d \u043f\u0435\u0440\u0432\u043e\u0433\u043e \u0443\u0440\u043e\u0432\u043d\u044f:", None))
         self.label_6.setText(QCoreApplication.translate("Widget", u"\u041f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u044b\u0435 \u0442\u0435\u043c\u0430\u0442\u0438\u043a\u0438 \u0441\u0430\u0439\u0442\u043e\u0432:", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Widget", u"\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.stats), QCoreApplication.translate("Widget", u"\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430", None))
         self.exit_button.setText(QCoreApplication.translate("Widget", u"\u0412\u044b\u0445\u043e\u0434", None))
     # retranslateUi
 

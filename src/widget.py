@@ -20,10 +20,12 @@ class Widget(QWidget):
         self.ui.setupUi(self)
         overrideTableWidget(self.ui)
         self.table_content = []
+        self.dates_hour = []
         self.ui.select_button.clicked.connect(self.show_dialog)
         self.ui.exit_button.clicked.connect(sys.exit)
         self.ui.confirm_button.clicked.connect(self.get_history)
         self.ui.confirm_button.clicked.connect(self.report_history)
+        self.ui.confirm_button.clicked.connect(self.most_visits_time)
         self.ui.tableWidget.itemDoubleClicked.connect(self.open_url)
 
 # Taking history from db and output to table widget
@@ -43,7 +45,11 @@ class Widget(QWidget):
         self.ui.tableWidget.setColumnHidden(3, True)
 
         for row_number, (title, raw_date, site_url, site_host) in enumerate(self.table_content):
+            # Convert date and save for next statistics
             date = datetime.fromtimestamp(round(raw_date/1000000))
+            self.dates_hour.append(date.hour)
+
+            # Insert data in QTable
             title_item = QTableWidgetItem(title)
             date_item = QTableWidgetItem(str(date))
             url_item = QTableWidgetItem(site_url)
@@ -82,3 +88,12 @@ class Widget(QWidget):
             count_item = QTableWidgetItem(str(sorted_tuple[i][1]))
             self.ui.topsiteTable.setItem(i, 0, name_item)
             self.ui.topsiteTable.setItem(i, 1, count_item)
+
+    def most_visits_time(self):
+        for i in range(24):
+            count = self.dates_hour.count(i)
+            hour_item = QTableWidgetItem(str(i)+":00")
+            count_item = QTableWidgetItem(str(count))
+            self.ui.activityTable.setItem(i, 0, hour_item)
+            self.ui.activityTable.setItem(i, 1, count_item)
+

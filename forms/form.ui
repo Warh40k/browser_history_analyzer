@@ -194,7 +194,7 @@
      <property name="currentIndex">
       <number>2</number>
      </property>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="history">
       <attribute name="title">
        <string>Список посещений</string>
       </attribute>
@@ -238,29 +238,27 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2">
+     <widget class="QWidget" name="top">
       <attribute name="title">
        <string>Топ</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Топ-10 популярных сайтов:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
         <widget class="QTableWidget" name="topsiteTable"/>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3">
+     <widget class="QWidget" name="activity">
+      <attribute name="title">
+       <string>Активность</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QTableWidget" name="activityTable"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="stats">
       <attribute name="title">
        <string>Статистика</string>
       </attribute>
