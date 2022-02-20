@@ -70,7 +70,6 @@ class Widget(QWidget):
         list_origins = []
         for i in self.table_content:
             list_origins.append(i[3])
-        print(list_origins)
         set_origins = set(list_origins)
         count_dict = {}
         for i in set_origins:
@@ -78,10 +77,8 @@ class Widget(QWidget):
 
         sorted_tuple = sorted(count_dict.items(), key=lambda x: x[1])
         sorted_tuple.reverse()
-        print(sorted_tuple[:15])
         for i in range(15):
             name_item = QTableWidgetItem(sorted_tuple[i][0])
             count_item = QTableWidgetItem(str(sorted_tuple[i][1]))
-            print(sorted_tuple[i][1])
             self.ui.topsiteTable.setItem(i, 0, name_item)
             self.ui.topsiteTable.setItem(i, 1, count_item)

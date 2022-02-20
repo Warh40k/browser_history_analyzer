@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGridLayout,
-    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QTabWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFormLayout, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QTabWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -147,6 +147,71 @@ class Ui_Widget(object):
         self.gridLayout.addWidget(self.topsiteTable, 1, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.formLayout_2 = QFormLayout(self.tab_3)
+        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.scrollArea = QScrollArea(self.tab_3)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 829, 405))
+        self.formLayout = QFormLayout(self.scrollAreaWidgetContents)
+        self.formLayout.setObjectName(u"formLayout")
+        self.label_3 = QLabel(self.scrollAreaWidgetContents)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setMinimumSize(QSize(600, 0))
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_3)
+
+        self.lineEdit_2 = QLineEdit(self.scrollAreaWidgetContents)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.lineEdit_2.setReadOnly(True)
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lineEdit_2)
+
+        self.label_4 = QLabel(self.scrollAreaWidgetContents)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setMinimumSize(QSize(600, 0))
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_4)
+
+        self.lineEdit_3 = QLineEdit(self.scrollAreaWidgetContents)
+        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.lineEdit_3.setReadOnly(True)
+
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.lineEdit_3)
+
+        self.label_5 = QLabel(self.scrollAreaWidgetContents)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMinimumSize(QSize(600, 0))
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_5)
+
+        self.lineEdit_4 = QLineEdit(self.scrollAreaWidgetContents)
+        self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.lineEdit_4.setReadOnly(True)
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.lineEdit_4)
+
+        self.label_6 = QLabel(self.scrollAreaWidgetContents)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setMinimumSize(QSize(600, 0))
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_6)
+
+        self.lineEdit_5 = QLineEdit(self.scrollAreaWidgetContents)
+        self.lineEdit_5.setObjectName(u"lineEdit_5")
+        self.lineEdit_5.setReadOnly(True)
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.lineEdit_5)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.formLayout_2.setWidget(0, QFormLayout.SpanningRole, self.scrollArea)
+
+        self.tabWidget.addTab(self.tab_3, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
 
@@ -165,7 +230,7 @@ class Ui_Widget(object):
 
         self.retranslateUi(Widget)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(Widget)
@@ -179,7 +244,12 @@ class Ui_Widget(object):
         self.confirm_button.setText(QCoreApplication.translate("Widget", u"\u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Widget", u"\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439", None))
         self.label_2.setText(QCoreApplication.translate("Widget", u"\u0422\u043e\u043f-10 \u043f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u044b\u0445 \u0441\u0430\u0439\u0442\u043e\u0432:", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Widget", u"\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Widget", u"\u0422\u043e\u043f", None))
+        self.label_3.setText(QCoreApplication.translate("Widget", u"\u0421\u0440\u0435\u0434\u043d\u0435\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u043e\u0441\u0435\u0449\u0435\u043d\u0438\u0439 \u0432 \u0434\u0435\u043d\u044c:", None))
+        self.label_4.setText(QCoreApplication.translate("Widget", u"\u0421\u0430\u043c\u043e\u0435 \u043f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u043e\u0435 \u0432\u0440\u0435\u043c\u044f \u0441\u0451\u0440\u0444\u0438\u043d\u0433\u0430:", None))
+        self.label_5.setText(QCoreApplication.translate("Widget", u"\u0421\u0430\u043c\u044b\u0439 \u043f\u043e\u0441\u0435\u0449\u0430\u0435\u043c\u044b\u0439 \u0434\u043e\u043c\u0435\u043d \u043f\u0435\u0440\u0432\u043e\u0433\u043e \u0443\u0440\u043e\u0432\u043d\u044f:", None))
+        self.label_6.setText(QCoreApplication.translate("Widget", u"\u041f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u044b\u0435 \u0442\u0435\u043c\u0430\u0442\u0438\u043a\u0438 \u0441\u0430\u0439\u0442\u043e\u0432:", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Widget", u"\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430", None))
         self.exit_button.setText(QCoreApplication.translate("Widget", u"\u0412\u044b\u0445\u043e\u0434", None))
     # retranslateUi
 
