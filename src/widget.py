@@ -101,13 +101,16 @@ class Widget(QWidget):
             self.ui.topsiteTable.setItem(i, 1, count_item)
 
     def most_visits_time(self):
+        visits_per_hour = []
         for i in range(24):
             count = self.dates_hour.count(i)
+            visits_per_hour.append(count)
             hour_item = QTableWidgetItem(str(i)+":00")
             count_item = QTableWidgetItem(str(count))
             self.ui.activityTable.setItem(i, 0, hour_item)
             self.ui.activityTable.setItem(i, 1, count_item)
 
         sc = MplCanvas(self, width=5, height=4, dpi=100)
-        sc.axes.plot([0, 1, 2, 3, 4], [10, 1, 20, 3, 40])
+        print(self.dates_hour)
+        sc.axes.plot([i for i in range(24)], visits_per_hour)
         self.ui.formLayout_2.addWidget(sc)
