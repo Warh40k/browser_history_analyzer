@@ -1,16 +1,27 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import sqlite3
+import matplotlib
+
+matplotlib.use('Qt5Agg')
 
 from override_form import overrideTableWidget
 from datetime import datetime
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
 
-from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem
+from PySide6.QtWidgets import QWidget, QFileDialog, QTableWidgetItem, QMainWindow
 from PySide6.QtCore import Slot, Qt
 from PySide6.QtGui import QDesktopServices
 
 from form import Ui_Widget
 
+class MplCanvas(FigureCanvasQTAgg):
+
+    def __init__(self, parent=None, width=5, height=4, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        super(MplCanvas, self).__init__(fig)
 
 class Widget(QWidget):
 
@@ -97,3 +108,16 @@ class Widget(QWidget):
             self.ui.activityTable.setItem(i, 0, hour_item)
             self.ui.activityTable.setItem(i, 1, count_item)
 
+
+class MainWindow(QMainWindow):
+
+    def __init__(self, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+
+        # Create the maptlotlib FigureCanvas object,
+        # which defines a single set of axes as self.axes.
+        sc = MplCanvas(self, width=5, height=4, dpi=100)
+        sc.axes.plot([0, 1, 2, 3, 4], [10, 1, 20, 3, 40])
+        self.setCentralWidget(sc)
+
+        self.show()
